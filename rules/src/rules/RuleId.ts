@@ -1,3 +1,5 @@
 export enum RuleId {
-  TheFirstStep = 1
+  ChooseCard = 1,
+  RevealCard,
+  ChooseRevealedCard
 }

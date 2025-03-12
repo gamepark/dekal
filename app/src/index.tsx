@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { GameTemplateOptionsSpec } from '@gamepark/game-template/GameTemplateOptions'
-import { GameTemplateRules } from '@gamepark/game-template/GameTemplateRules'
-import { GameTemplateSetup } from '@gamepark/game-template/GameTemplateSetup'
+import { DekalOptionsSpec } from '@gamepark/dekal/DekalOptions'
+import { DekalRules } from '@gamepark/dekal/DekalRules'
+import { DekalSetup } from '@gamepark/dekal/DekalSetup'
 import { GameProvider, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
@@ -16,10 +16,10 @@ setupTranslation(translations, { debug: false })
 ReactDOM.render(
   <StrictMode>
     <GameProvider
-      game="game-template"
-      Rules={GameTemplateRules}
-      optionsSpec={GameTemplateOptionsSpec}
-      GameSetup={GameTemplateSetup}
+      game="dekal"
+      Rules={DekalRules}
+      optionsSpec={DekalOptionsSpec}
+      GameSetup={DekalSetup}
       material={Material}
       locators={Locators}
       animations={gameAnimations}>

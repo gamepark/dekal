@@ -1,3 +1,3 @@
-export { GameTemplateRules } from './GameTemplateRules'
-export { GameTemplateOptionsSpec } from './GameTemplateOptions'
-export { GameTemplateSetup } from './GameTemplateSetup'
+export { DekalRules } from './DekalRules'
+export { DekalOptionsSpec } from './DekalOptions'
+export { DekalSetup } from './DekalSetup'

@@ -1,6 +1,12 @@
-import { LocationType } from '@gamepark/game-template/material/LocationType'
-import { MaterialType } from '@gamepark/game-template/material/MaterialType'
-import { PlayerColor } from '@gamepark/game-template/PlayerColor'
+import { PlayerId } from '@gamepark/dekal/DekalOptions'
+import { LocationType } from '@gamepark/dekal/material/LocationType'
+import { MaterialType } from '@gamepark/dekal/material/MaterialType'
 import { Locator } from '@gamepark/react-game'
+import { dropAreaLocator } from './DropZoneLocator'
+import { tableauLocator } from './TableauLocator'
 
-export const Locators: Partial<Record<LocationType, Locator<PlayerColor, MaterialType, LocationType>>> = {}
+export const Locators: Partial<Record<LocationType, Locator<PlayerId, MaterialType, LocationType>>> = {
+  [LocationType.Tableau]: tableauLocator,
+  [LocationType.DropArea]: dropAreaLocator
+
+}
