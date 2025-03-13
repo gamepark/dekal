@@ -1,13 +1,13 @@
 import { Direction, directions, isMoveItemType, ItemMove, Location, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
-import range from 'lodash/range'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { Memory } from './Memory'
 import { RuleId } from './RuleId'
+import { isOutside } from './utils/square.utils'
 
 export class ChooseRevealedCard extends PlayerTurnRule {
   getPlayerMoves() {
-    if (this.cardOutsizeSquare) return []
+    if (this.cardOutsizeSquare.length) return []
     const availableCards = this.availableCards
     return this.possibleSpaces.flatMap((space) => availableCards.moveItems({
       type: LocationType.Tableau,
@@ -23,7 +23,7 @@ export class ChooseRevealedCard extends PlayerTurnRule {
   }
 
   get cardOutsizeSquare() {
-    return this.tableau.location((l) => this.isOutside(l)).getItem()!
+    return this.tableau.location((l) => isOutside(l))
   }
 
   get possibleSpaces() {
@@ -60,75 +60,94 @@ export class ChooseRevealedCard extends PlayerTurnRule {
   }
 
   beforeItemMove(move: ItemMove) {
+    if (!isMoveItemType(MaterialType.Card)(move) ) return []
+
+    if (isOutside(move.location as Location)) {
+      return this.moveCardBetweenFreeSpaceAndPlacedCard(move)
+    }
+
+    return []
+  }
+
+  afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move)) return []
     const cardOutsize = this.cardOutsizeSquare
     const nextPlayer = this.nextPlayer
-    if (!cardOutsize) {
-      if (nextPlayer === this.firstPlayer) return [this.startSimultaneousRule(RuleId.ChooseCard, this.game.players)]
-      return [this.startPlayerTurn(RuleId.ChooseRevealedCard, this.nextPlayer)]
-    }
-
-    if (!this.isOutside(move.location as Location)) return []
-    return this.moveCardBetweenFreeSpaceAndPlacedCard(move)
-  }
-
-  isOutside(location: Location) {
-    return location.x! < 0 || location.x! > 3 || location.y! < 0 || location.y! > 3
+    if (cardOutsize.length) return []
+    if (nextPlayer === this.firstPlayer) return [this.startSimultaneousRule(RuleId.ChooseCard, this.game.players)]
+    return [this.startPlayerTurn(RuleId.ChooseRevealedCard, this.nextPlayer)]
   }
 
   moveCardBetweenFreeSpaceAndPlacedCard(move: MoveItem) {
     const freeSpace = this.emptySpace!
+    const tableau = this.tableau
+    const card = this.material(MaterialType.Card).index(move.itemIndex)
     const moves: MaterialMove[] = []
+    const targetLocation = move.location as Location
     if (move.location.x! < 0) {
       moves.push(
-        ...this.getCardInLineBetweenMovedAndFreeSpace(move.location.y!, move.location.x!, freeSpace.x)
+        ...tableau
+          .location((l) => l.y === move.location.y && l.x! > move.location.x! && l.x! < freeSpace.x)
+          .sort((i) => -i.location.x!)
           .moveItems((item) => ({
             ...item.location,
             x: item.location.x! + 1
-          }))
+          })),
+        card.moveItem({
+            ...targetLocation,
+            x: targetLocation.x! + 1
+        })
       )
     }
     if (move.location.x! > 3) {
       moves.push(
-        ...this.getCardInLineBetweenMovedAndFreeSpace(move.location.y!, freeSpace.x, move.location.x!)
+        ...tableau
+          .location((l) => l.y === move.location.y && l.x! > freeSpace.x! && l.x! < move.location.x!)
+          .sort((i) => i.location.x!)
           .moveItems((item) => ({
             ...item.location,
             x: item.location.x! - 1
-          }))
+          })),
+        card.moveItem({
+            ...targetLocation,
+            x: targetLocation.x! - 1
+        })
       )
     }
 
     if (move.location.y! < 0) {
       moves.push(
-        ...this.getCardInColumnBetweenMovedAndFreeSpace(move.location.x!, move.location.y!, freeSpace.y)
+        ...tableau
+          .location((l) => l.x === move.location.x && l.y! > move.location.y! && l.y! < freeSpace.y)
+          .sort((i) => -i.location.y!)
           .moveItems((item) => ({
             ...item.location,
             y: item.location.y! + 1
-          }))
+          })),
+        card.moveItem({
+          ...targetLocation,
+          y: targetLocation.y! + 1
+        })
       )
 
     }
     if (move.location.y! > 3) {
       moves.push(
-        ...this.getCardInColumnBetweenMovedAndFreeSpace(move.location.x!, freeSpace.y, move.location.y!)
+        ...tableau
+          .location((l) => l.x === move.location.x && l.y! > freeSpace.y && l.y! < move.location.y!)
+          .sort((i) => i.location.y!)
           .moveItems((item) => ({
             ...item.location,
             y: item.location.y! - 1
-          }))
+          })),
+        card.moveItem({
+          ...targetLocation,
+          y: targetLocation.y! - 1
+        })
       )
     }
 
     return moves
-  }
-
-  getCardInLineBetweenMovedAndFreeSpace(y: number, fromX: number, toX: number) {
-    const allX = range(fromX + 1, toX)
-    return this.tableau.location((l) => l.y === y && allX.includes(l.x!))
-  }
-
-  getCardInColumnBetweenMovedAndFreeSpace(x: number, fromY: number, toY: number) {
-    const allY = range(fromY + 1, toY)
-    return this.tableau.location((l) => l.x === x && allY.includes(l.y!))
   }
 
   get emptySpace() {

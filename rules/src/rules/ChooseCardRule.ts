@@ -6,6 +6,11 @@ import { Memory, PlayerLootCard } from './Memory'
 import { RuleId } from './RuleId'
 
 export class ChooseCardRule extends SimultaneousRule<PlayerId, MaterialType, LocationType> {
+  onRuleStart() {
+    this.forget(Memory.FirstPlayer)
+    this.forget(Memory.LootCards)
+    return []
+  }
   getActivePlayerLegalMoves(player:PlayerId) {
     return this.getTableau(player)
       .moveItems({

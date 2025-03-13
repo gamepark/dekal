@@ -4,7 +4,7 @@ import { gameCardDescription } from '../material/GameCardDescription'
 
 export class TableauLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
-    let base = { x: 0, y: 0 }
+    let base = { x: 0, y: 20 }
     if (context.rules.players.length === 2) {
       if (location.player === (context.player ?? context.rules.players[0])) {
         base.x -= 30

@@ -10,7 +10,7 @@ class DropZoneLocator extends ListLocator {
   gap = { x: gameCardDescription.height + 0.5 }
 
   getCoordinates(_location: Location, context: MaterialContext): Partial<Coordinates> {
-    return { x: -(gameCardDescription.width + 0.5) * ((context.rules.players.length - 1) / 2), y: -10 }
+    return { x: -(gameCardDescription.width + 0.5) * ((context.rules.players.length - 1) / 2), y: 5 }
   }
 
   locationDescription = new DropZoneDescription()
@@ -20,8 +20,8 @@ class DropZoneDescription extends DropAreaDescription {
   borderRadius = gameCardDescription.borderRadius
   getLocationSize(_location: Location, context: MaterialContext): ComponentSize {
     return {
-      width: context.rules.players.length * gameCardDescription.height + ((context.rules.players.length - 1) * 0.5),
-      height: gameCardDescription.width,
+      width: context.rules.players.length * gameCardDescription.width + ((context.rules.players.length - 1) * 0.5) + 2,
+      height: gameCardDescription.height + 2,
     }
   }
 }

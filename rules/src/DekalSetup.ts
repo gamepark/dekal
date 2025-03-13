@@ -16,6 +16,16 @@ export class DekalSetup extends MaterialGameSetup<PlayerId, MaterialType, Locati
 
   setupMaterial(_options: DekalOptions) {
     this.setupPlayersTableaux()
+    this.setupFirstPlayerToken()
+  }
+
+  setupFirstPlayerToken() {
+    this.material(MaterialType.FirstPlayer)
+      .createItem({
+        location: {
+          type: LocationType.FirstPlayerArea
+        }
+      })
   }
 
   setupPlayersTableaux() {

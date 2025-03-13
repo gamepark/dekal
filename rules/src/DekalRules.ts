@@ -1,9 +1,10 @@
-import { MaterialGame, MaterialItem, MaterialMove, PositiveSequenceStrategy, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
+import { FillGapStrategy, isCustomMoveType, MaterialGame, MaterialItem, MaterialMove, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
 import { PlayerId } from './DekalOptions'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { ChooseCardRule } from './rules/ChooseCardRule'
 import { ChooseRevealedCard } from './rules/ChooseRevealedCard'
+import { CustomMoveType } from './rules/CustomMoveType'
 import { RevealRule } from './rules/RevealRule'
 import { RuleId } from './rules/RuleId'
 
@@ -22,7 +23,7 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
 
   locationsStrategies = {
     [MaterialType.Card]: {
-      [LocationType.DropArea]: new PositiveSequenceStrategy()
+      [LocationType.DropArea]: new FillGapStrategy()
     }
   }
 
@@ -35,6 +36,10 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
 
   giveTime(): number {
     return 60
+  }
+
+  isUnpredictableMove(move: MaterialMove<PlayerId, MaterialType, LocationType>, player: PlayerId): boolean {
+    return isCustomMoveType(CustomMoveType.SamplePlayer)(move) || super.isUnpredictableMove(move, player)
   }
 }
 
