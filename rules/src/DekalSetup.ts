@@ -1,5 +1,6 @@
 import { MaterialGameSetup, MaterialItem } from '@gamepark/rules-api'
 import range from 'lodash/range'
+import sample from 'lodash/sample'
 import shuffle from 'lodash/shuffle'
 import times from 'lodash/times'
 import { DekalOptions, PlayerId } from './DekalOptions'
@@ -23,7 +24,8 @@ export class DekalSetup extends MaterialGameSetup<PlayerId, MaterialType, Locati
     this.material(MaterialType.FirstPlayer)
       .createItem({
         location: {
-          type: LocationType.FirstPlayerArea
+          type: LocationType.FirstPlayerArea,
+          player: sample(this.players)
         }
       })
   }

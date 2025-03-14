@@ -21,7 +21,7 @@ class DropZoneDescription extends DropAreaDescription {
   getLocationSize(_location: Location, context: MaterialContext): ComponentSize {
     return {
       width: context.rules.players.length * gameCardDescription.width + ((context.rules.players.length - 1) * 0.5) + 2,
-      height: gameCardDescription.height + 2,
+      height: gameCardDescription.height + 2  ,
     }
   }
 }

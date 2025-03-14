@@ -2,7 +2,7 @@ import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
 import { isOutside } from '@gamepark/dekal/rules/utils/square.utils'
 import { MaterialGameAnimations } from '@gamepark/react-game'
-import { isMoveItemType } from '@gamepark/rules-api'
+import { isMoveItemType, isDeleteItemTypeAtOnce } from '@gamepark/rules-api'
 
 export const gameAnimations = new MaterialGameAnimations()
 
@@ -22,3 +22,8 @@ gameAnimations
     && move.location.type === LocationType.Tableau)
   .duration(0.2)
 
+
+gameAnimations
+  .when()
+  .move(isDeleteItemTypeAtOnce(MaterialType.Card))
+  .duration(1)

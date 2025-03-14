@@ -4,6 +4,7 @@ import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { ChooseCardRule } from './rules/ChooseCardRule'
 import { ChooseRevealedCard } from './rules/ChooseRevealedCard'
+import { CleanupTableauRule } from './rules/CleanupTableauRule'
 import { CustomMoveType } from './rules/CustomMoveType'
 import { RevealRule } from './rules/RevealRule'
 import { RuleId } from './rules/RuleId'
@@ -18,7 +19,8 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
   rules = {
     [RuleId.ChooseCard]: ChooseCardRule,
     [RuleId.RevealCard]: RevealRule,
-    [RuleId.ChooseRevealedCard]: ChooseRevealedCard
+    [RuleId.ChooseRevealedCard]: ChooseRevealedCard,
+    [RuleId.CleanupTableau]: CleanupTableauRule,
   }
 
   locationsStrategies = {

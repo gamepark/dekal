@@ -1,7 +1,6 @@
 import { Direction, directions, isMoveItemType, ItemMove, Location, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
-import { Memory } from './Memory'
 import { RuleId } from './RuleId'
 import { isOutside } from './utils/square.utils'
 
@@ -55,10 +54,6 @@ export class ChooseRevealedCard extends PlayerTurnRule {
     return spaces
   }
 
-  get firstPlayer() {
-    return this.remind(Memory.FirstPlayer)
-  }
-
   beforeItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) ) return []
 
@@ -72,10 +67,20 @@ export class ChooseRevealedCard extends PlayerTurnRule {
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move)) return []
     const cardOutsize = this.cardOutsizeSquare
-    const nextPlayer = this.nextPlayer
     if (cardOutsize.length) return []
-    if (nextPlayer === this.firstPlayer) return [this.startSimultaneousRule(RuleId.ChooseCard, this.game.players)]
+    if (this.isEnded) return [this.startRule(RuleId.CleanupTableau)]
+    if (this.availableCards.length === 0) return [this.startSimultaneousRule(RuleId.ChooseCard, this.game.players)]
     return [this.startPlayerTurn(RuleId.ChooseRevealedCard, this.nextPlayer)]
+  }
+
+  get isEnded() {
+    return this.hiddenCards.length === 0 && this.availableCards.length === 0
+  }
+
+  get hiddenCards() {
+    return this.material(MaterialType.Card)
+      .location(LocationType.Tableau)
+      .rotation(true)
   }
 
   moveCardBetweenFreeSpaceAndPlacedCard(move: MoveItem) {
