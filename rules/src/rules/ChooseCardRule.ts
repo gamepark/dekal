@@ -25,6 +25,7 @@ export class ChooseCardRule extends SimultaneousRule<PlayerId, MaterialType, Loc
     return this.getTableau(player)
       .moveItems({
         type: LocationType.DropArea,
+        player: player,
         rotation: true
       })
   }

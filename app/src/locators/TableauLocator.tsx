@@ -2,25 +2,42 @@
 import { css, Interpolation, Theme } from '@emotion/react'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { isOutside } from '@gamepark/dekal/rules/utils/square.utils'
-import { DropAreaDescription, LocationContext, Locator, MaterialContext } from '@gamepark/react-game'
-import { Coordinates, Location } from '@gamepark/rules-api'
+import { DropAreaDescription, getRelativePlayerIndex, LocationContext, Locator, MaterialContext } from '@gamepark/react-game'
+import { Coordinates, Location, XYCoordinates } from '@gamepark/rules-api'
 import { gameCardDescription } from '../material/GameCardDescription'
+import { playerPositions, Position } from './position.utils'
+
 
 export class TableauLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
-    let base = { x: 0, y: 20, z: 0.5 }
-    if (context.rules.players.length === 2) {
-      if (location.player === (context.player ?? context.rules.players[0])) {
-        base.x -= 30
-      } else {
-        base.x += 10
-      }
-    }
-
+    let base = this.getBaseCoordinates(location, context)
     base.x += location.x! * (gameCardDescription.width + .5)
     base.y += location.y! * (gameCardDescription.height + .5)
 
     return base
+  }
+
+  getBaseCoordinates(location: Location, context: MaterialContext): XYCoordinates & { z?: number } {
+    const playerIndex = getRelativePlayerIndex(context, location.player)
+    const position = playerPositions[context.rules.players.length - 2][playerIndex]
+    const players = context.rules.players.length
+    switch (position) {
+      case Position.TopLeft:
+        return { x: -40, y: -20, z: 0.5 }
+      case Position.TopCenter:
+        return { x: 4, y: -17.5}
+      case Position.TopRight:
+        return { x: 20, y: -20, z: 0.5 }
+      case Position.BottomRight:
+        if (players === 3) return { x: 30, y: 20, z: 0.5 }
+        if (players === 4) return { x: 20, y: 20, z: 0.5 }
+        return { x: 10, y: 20, z: 0.5 }
+      case Position.BottomLeft:
+      default:
+        if (players === 3) return { x: -50, y: 20, z: 0.5 }
+        if (players === 4) return { x: -40, y: 20, z: 0.5 }
+        return { x: -30, y: 20, z: 0.5 }
+    }
   }
 
   getLocations(context: MaterialContext) {

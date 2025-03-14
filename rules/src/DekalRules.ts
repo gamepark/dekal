@@ -1,4 +1,4 @@
-import { FillGapStrategy, isCustomMoveType, MaterialGame, MaterialItem, MaterialMove, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
+import { isCustomMoveType, MaterialGame, MaterialItem, MaterialMove, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
 import { PlayerId } from './DekalOptions'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
@@ -24,9 +24,6 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
   }
 
   locationsStrategies = {
-    [MaterialType.Card]: {
-      [LocationType.DropArea]: new FillGapStrategy()
-    }
   }
 
   hidingStrategies = {
