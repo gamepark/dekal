@@ -1,4 +1,15 @@
-import { Direction, directions, isMoveItemType, ItemMove, Location, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
+import {
+  Direction,
+  directions,
+  isMoveItemType,
+  isSelectItemType,
+  ItemMove,
+  Location,
+  MaterialMove,
+  MoveItem,
+  PlayerTurnRule,
+  XYCoordinates
+} from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
@@ -55,9 +66,10 @@ export class ChooseRevealedCard extends PlayerTurnRule {
   }
 
   beforeItemMove(move: ItemMove) {
-    if (!isMoveItemType(MaterialType.Card)(move) ) return []
+    if (!isMoveItemType(MaterialType.Card)(move)) return []
 
     if (isOutside(move.location as Location)) {
+      this.material(MaterialType.Card).selected(true).getItems().forEach((item) => delete item.selected)
       return this.moveCardBetweenFreeSpaceAndPlacedCard(move)
     }
 
@@ -65,6 +77,15 @@ export class ChooseRevealedCard extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove) {
+    if (isSelectItemType(MaterialType.Card)(move)) {
+      const selectedItems = this.material(MaterialType.Card)
+        .selected(true)
+        .index((i) => move.itemIndex !== i)
+        .getItems()
+      for (const item of selectedItems) {
+        delete item.selected
+      }
+    }
     if (!isMoveItemType(MaterialType.Card)(move)) return []
     const cardOutsize = this.cardOutsizeSquare
     if (cardOutsize.length) return []
@@ -99,8 +120,8 @@ export class ChooseRevealedCard extends PlayerTurnRule {
             x: item.location.x! + 1
           })),
         card.moveItem({
-            ...targetLocation,
-            x: targetLocation.x! + 1
+          ...targetLocation,
+          x: targetLocation.x! + 1
         })
       )
     }
@@ -114,8 +135,8 @@ export class ChooseRevealedCard extends PlayerTurnRule {
             x: item.location.x! - 1
           })),
         card.moveItem({
-            ...targetLocation,
-            x: targetLocation.x! - 1
+          ...targetLocation,
+          x: targetLocation.x! - 1
         })
       )
     }

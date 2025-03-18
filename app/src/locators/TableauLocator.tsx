@@ -1,9 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from '@emotion/react'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
+import { MaterialType } from '@gamepark/dekal/material/MaterialType'
+import { ChooseRevealedCard } from '@gamepark/dekal/rules/ChooseRevealedCard'
 import { isOutside } from '@gamepark/dekal/rules/utils/square.utils'
 import { DropAreaDescription, getRelativePlayerIndex, LocationContext, Locator, MaterialContext } from '@gamepark/react-game'
-import { Coordinates, Location, XYCoordinates } from '@gamepark/rules-api'
+import { Coordinates, isMoveItemType, Location, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
+import isEqual from 'lodash/isEqual'
 import { gameCardDescription } from '../material/GameCardDescription'
 import { playerPositions, Position } from './position.utils'
 
@@ -31,22 +34,21 @@ export class TableauLocator extends Locator {
       case Position.BottomRight:
         if (players === 3) return { x: 30, y: 20, z: 0.5 }
         if (players === 4) return { x: 20, y: 20, z: 0.5 }
-        return { x: 10, y: 20, z: 0.5 }
+        return { x: 15, y: 21, z: 0.5 }
       case Position.BottomLeft:
       default:
         if (players === 3) return { x: -50, y: 20, z: 0.5 }
         if (players === 4) return { x: -40, y: 20, z: 0.5 }
-        return { x: -30, y: 20, z: 0.5 }
+        return { x: -35, y: 21, z: 0.5 }
     }
   }
+
 
   getLocations(context: MaterialContext) {
     const locations: Location[] = []
     for (const player of context.rules.players) {
       for (let x = 0; x < 4; x++) {
         for (let y = 0; y < 4; y++) {
-          //const itemOnPosition = context.rules.material(MaterialType.Card).player(player).location((l) => l.x === x && l.y === y)
-          //if (itemOnPosition.length) continue
           locations.push({
             type: LocationType.Tableau,
             player: player,
@@ -56,6 +58,26 @@ export class TableauLocator extends Locator {
         }
       }
     }
+
+
+    const { rules } = context
+    const selected = rules.material(MaterialType.Card).selected()
+
+    if (selected.length) {
+      const player = rules.getActivePlayer()
+      const possibleSpaces = new ChooseRevealedCard(context.rules.game).possibleSpaces
+
+      locations.push(
+        ...possibleSpaces.map((space) => ({
+          type: LocationType.Tableau,
+          player: player,
+          ...space
+        }))
+      )
+
+      console.log("????", locations)
+    }
+
 
     return locations
   }
@@ -75,6 +97,17 @@ class TableauDescription extends DropAreaDescription {
       background-image: linear-gradient(45deg, #ffffff30 25%, #ffffff00 25%, #ffffff00 50%, #ffffff30 50%, #ffffff30 75%, #ffffff00 75%, #ffffff00 100%);
       background-size: 56.57px 56.57px;
   `
+  }
+
+  canShortClick(move: MaterialMove, location: Location, context: MaterialContext) {
+    const { rules } = context
+    const selected = rules.material(MaterialType.Card).selected()
+    if (selected.length && isMoveItemType(MaterialType.Card)(move) && move.location.type === LocationType.Tableau) {
+      if (!isEqual(move.location, location)) return false
+      selected.getIndex() === move.itemIndex && console.log("Is move to location", selected.getIndex(), move.itemIndex, move)
+      return selected.getIndex() === move.itemIndex
+    }
+    return super.canShortClick(move, location, context)
   }
 }
 

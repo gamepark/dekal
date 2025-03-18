@@ -16,7 +16,7 @@ export class FirstPlayerAreaLocator extends Locator {
       coordinates.y! -= 7
     } else {
       coordinates.x! += isLeftPosition(position)? 28: -7
-      coordinates.y! += 26
+      coordinates.y! += 28
     }
 
     return coordinates

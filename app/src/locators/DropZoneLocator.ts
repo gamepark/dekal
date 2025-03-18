@@ -13,11 +13,9 @@ class DropZoneLocator extends Locator {
     const index = getRelativePlayerIndex(context, location.player)
     const position = playerPositions[context.rules.players.length - 2][index]
     const coordinates = tableauLocator.getCoordinates({ type: LocationType.Tableau, player: location.player, x: 0, y: 0 }, context)
-    console.log(position, location.player, coordinates)
-
     if (context.rules.players.length === 2) {
-      coordinates.y! -= 10
-      coordinates.x! += isLeftPosition(position)? 38: -20
+      coordinates.y! -= 14
+      coordinates.x! += isLeftPosition(position)? 30: -10
     } else {
       coordinates.x! += isLeftPosition(position)? 45: -25
       coordinates.y! += isTopPosition(position)? 25: -5
