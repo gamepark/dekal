@@ -26,19 +26,23 @@ export class TableauLocator extends Locator {
     const players = context.rules.players.length
     switch (position) {
       case Position.TopLeft:
+        if (players === 6) return { x: -50, y: -20, z: 0.5 }
         return { x: -40, y: -20, z: 0.5 }
       case Position.TopCenter:
         return { x: 4, y: -17.5}
       case Position.TopRight:
+        if (players === 6) return { x: 30, y: -20, z: 0.5 }
         return { x: 20, y: -20, z: 0.5 }
       case Position.BottomRight:
         if (players === 3) return { x: 30, y: 20, z: 0.5 }
         if (players === 4) return { x: 20, y: 20, z: 0.5 }
+        if (players === 6) return { x: 10, y: 20, z: 0.5 }
         return { x: 15, y: 21, z: 0.5 }
       case Position.BottomLeft:
       default:
         if (players === 3) return { x: -50, y: 20, z: 0.5 }
         if (players === 4) return { x: -40, y: 20, z: 0.5 }
+        if (players === 6) return { x: -30, y: 20, z: 0.5 }
         return { x: -35, y: 21, z: 0.5 }
     }
   }

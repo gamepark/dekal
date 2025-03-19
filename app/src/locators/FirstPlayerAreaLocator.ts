@@ -12,10 +12,10 @@ export class FirstPlayerAreaLocator extends Locator {
     const coordinates = tableauLocator.getCoordinates({ type: LocationType.Tableau, player: location.player, x: 0, y: 0 }, context)
 
     if (!isTopPosition(position)) {
-      coordinates.x! += isLeftPosition(position)? 28: -7
-      coordinates.y! -= 7
+      coordinates.x! += isLeftPosition(position)? 26: -7
+      coordinates.y! -= 5
     } else {
-      coordinates.x! += isLeftPosition(position)? 28: -7
+      coordinates.x! += isLeftPosition(position)? 26: -7
       coordinates.y! += 28
     }
 

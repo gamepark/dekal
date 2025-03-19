@@ -1,4 +1,4 @@
-import { CompetitiveRank, isCustomMoveType, MaterialGame, MaterialItem, MaterialMove, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
+import { CompetitiveScore, isCustomMoveType, MaterialGame, MaterialItem, MaterialMove, SecretMaterialRules, TimeLimit } from '@gamepark/rules-api'
 import { PlayerId } from './DekalOptions'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
@@ -16,7 +16,7 @@ import { ScoringHelper } from './rules/utils/ScoringHelper'
  * It must follow Game Park "Rules" API so that the Game Park server can enforce the rules.
  */
 export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, LocationType>
-  implements CompetitiveRank<MaterialGame<PlayerId, MaterialType, LocationType>, MaterialMove<PlayerId, MaterialType, LocationType>, PlayerId>,
+  implements CompetitiveScore<MaterialGame<PlayerId, MaterialType, LocationType>, MaterialMove<PlayerId, MaterialType, LocationType>, PlayerId>,
     TimeLimit<MaterialGame<PlayerId, MaterialType, LocationType>, MaterialMove<PlayerId, MaterialType, LocationType>, PlayerId> {
   rules = {
     [RuleId.ChooseCard]: ChooseCardRule,
@@ -44,22 +44,7 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
   }
 
   getScore(player: PlayerId) {
-    return new ScoringHelper(this.game, player).score
-  }
-
-  rankPlayers(playerA: PlayerId, playerB: PlayerId): number {
-      const playerAHelper = new ScoringHelper(this.game, playerA)
-      const playerBHelper = new ScoringHelper(this.game, playerB)
-
-    const aScore = playerAHelper.score
-    const bScore = playerBHelper.score
-
-
-    if (aScore === bScore) {
-      return playerAHelper.tableau.length - playerBHelper.tableau.length
-    }
-
-    return aScore - bScore
+    return -new ScoringHelper(this.game, player).score
   }
 
   getTieBreaker(tieBreaker:number, playerId:PlayerId) {

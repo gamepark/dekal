@@ -17,7 +17,7 @@ class DropZoneLocator extends Locator {
       coordinates.y! -= 14
       coordinates.x! += isLeftPosition(position)? 30: -10
     } else {
-      coordinates.x! += isLeftPosition(position)? 45: -25
+      coordinates.x! += isLeftPosition(position)? 35: -15
       coordinates.y! += isTopPosition(position)? 25: -5
     }
 
