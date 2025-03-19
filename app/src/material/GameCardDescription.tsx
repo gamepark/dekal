@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import { css, Interpolation, Theme } from '@emotion/react'
 import { faHandPointer } from '@fortawesome/free-regular-svg-icons/faHandPointer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
@@ -38,19 +38,11 @@ export class GameCardDescription extends CardDescription {
 
   menuAlwaysVisible = true
 
-  getItemExtraCss(item: MaterialItem) {
-    if (!item.selected) return
-    return css`
-      &:after {
-        content: '';
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 128, 0, 0.5);
-      }
-    `
+  getItemExtraCss(item: MaterialItem, context: ItemContext): Interpolation<Theme> {
+    if (item.location.type !== LocationType.DropArea) return
+    const selected = context.rules.material(context.type).selected(true)
+    if(selected.length && !item.selected) return css`filter: brightness(50%)`
+    return
   }
 
   getItemMenu(_item: MaterialItem, context: ItemContext, legalMoves: MaterialMove[]) {

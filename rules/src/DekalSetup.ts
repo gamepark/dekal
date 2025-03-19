@@ -31,12 +31,13 @@ export class DekalSetup extends MaterialGameSetup<PlayerId, MaterialType, Locati
   }
 
   setupPlayersTableaux() {
-    const cards = range(1, 10).flatMap((v) => times(10, () => v))
+    const cards = range(1, 11).flatMap((v) => times(10, () => v))
     const shuffledCards = shuffle(cards)
     for (const player of this.players) {
       this.setupPlayerTableau(shuffledCards, player)
     }
   }
+
   setupPlayerTableau(cards: number[], playerId: PlayerId) {
     const playerCards: number[] = cards
       .slice((playerId - 1) * 16, playerId * 16)

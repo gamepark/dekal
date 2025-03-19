@@ -22,13 +22,15 @@ export const GameDisplay: FC<GameDisplayProps> = ({players}) => {
 }
 
 const sizes = [
-  { xMin: -47, xMax: 47, yMin: 0, yMax: 52 },
-  { xMin: -70, xMax: 70, yMin: -30, yMax: 52 },
-  { xMin: -70, xMax: 70, yMin: -30, yMax: 50 },
+  { xMin: -45, xMax: 45, yMin: 5, yMax: 50 },
+  { xMin: -55, xMax: 55, yMin: -3, yMax: 52 },
+  { xMin: -70, xMax: 70, yMin: -28, yMax: 48 },
+  { xMin: -79, xMax: 79, yMin: -32, yMax: 51 },
+  { xMin: -79, xMax: 79, yMin: -32, yMax: 51 },
 ]
 
 const navigationCss = css`
   position: absolute; 
   left: 2em; 
-  top: 20em;
+  top: 25em;
 `

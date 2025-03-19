@@ -9,7 +9,7 @@ import { Coordinates, isMoveItemType, Location, MaterialMove, XYCoordinates } fr
 import isEqual from 'lodash/isEqual'
 import { gameCardDescription } from '../material/GameCardDescription'
 import { playerPositions, Position } from './position.utils'
-
+import Arrow from '../images/arrow.png'
 
 export class TableauLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
@@ -26,23 +26,28 @@ export class TableauLocator extends Locator {
     const players = context.rules.players.length
     switch (position) {
       case Position.TopLeft:
-        if (players === 6) return { x: -50, y: -20, z: 0.5 }
-        return { x: -40, y: -20, z: 0.5 }
+        if (players >= 5) return { x: -56, y: -17.5, z: 0.5 }
+        //if (players <= 6) return { x: -56, y: -17.5, z: 0.5 }
+        return { x: -40, y: -17.5, z: 0.5 }
       case Position.TopCenter:
-        return { x: 4, y: -17.5}
+        if (players === 6) return { x: -5, y: -17.5 }
+        return { x: -10, y: -17.5 }
       case Position.TopRight:
-        if (players === 6) return { x: 30, y: -20, z: 0.5 }
-        return { x: 20, y: -20, z: 0.5 }
+        if (players >= 5) return { x: 36, y: -17.5, z: 0.5 }
+        return { x: 20, y: -17.5, z: 0.5 }
       case Position.BottomRight:
-        if (players === 3) return { x: 30, y: 20, z: 0.5 }
-        if (players === 4) return { x: 20, y: 20, z: 0.5 }
-        if (players === 6) return { x: 10, y: 20, z: 0.5 }
+        if (players === 3) return { x: 25, y: 17.5, z: 0.5 }
+        if (players === 4) return { x: 20, y: 17.5, z: 0.5 }
+        if (players >= 5) return { x: 36, y: 17.5, z: 0.5 }
         return { x: 15, y: 21, z: 0.5 }
+      case Position.BottomCenter:
+        if (players === 6) return { x: -5, y: 17.5 }
+        return { x: -10, y: 17.5 }
       case Position.BottomLeft:
       default:
-        if (players === 3) return { x: -50, y: 20, z: 0.5 }
-        if (players === 4) return { x: -40, y: 20, z: 0.5 }
-        if (players === 6) return { x: -30, y: 20, z: 0.5 }
+        if (players === 3) return { x: -45, y: 17.5, z: 0.5 }
+        if (players === 4) return { x: -40, y: 17.5, z: 0.5 }
+        if (players >= 5) return { x: -56, y: 17.5, z: 0.5 }
         return { x: -35, y: 21, z: 0.5 }
     }
   }
@@ -57,7 +62,7 @@ export class TableauLocator extends Locator {
             type: LocationType.Tableau,
             player: player,
             x: x,
-            y: y,
+            y: y
           })
         }
       }
@@ -79,7 +84,6 @@ export class TableauLocator extends Locator {
         }))
       )
 
-      console.log("????", locations)
     }
 
 
@@ -95,12 +99,33 @@ class TableauDescription extends DropAreaDescription {
     super(gameCardDescription)
   }
 
-  getExtraCss(location: Location, context: LocationContext): Interpolation<Theme> {
-    if (isOutside(location)) return super.getExtraCss(location, context)
+  getExtraCss(location: Location, _context: LocationContext): Interpolation<Theme> {
+    if (isOutside(location)) {
+      return css`
+          &:before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: url(${Arrow}) no-repeat center;
+              background-size: ${gameCardDescription.width * 0.7}em;
+              ${this.getArrowRotation(location)};
+          }
+      `
+    }
     return css`
-      background-image: linear-gradient(45deg, #ffffff30 25%, #ffffff00 25%, #ffffff00 50%, #ffffff30 50%, #ffffff30 75%, #ffffff00 75%, #ffffff00 100%);
-      background-size: 56.57px 56.57px;
-  `
+        background-image: linear-gradient(45deg, #ffffff30 25%, #ffffff00 25%, #ffffff00 50%, #ffffff30 50%, #ffffff30 75%, #ffffff00 75%, #ffffff00 100%);
+        background-size: 56.57px 56.57px;
+    `
+  }
+
+  getArrowRotation(location: Location) {
+    if (location.y! < 0) return css`transform: rotateZ(90deg)`
+    if (location.x! > 3) return css`transform: rotateZ(180deg)`
+    if (location.y! > 3) return css`transform: rotateZ(270deg)`
+    return
   }
 
   canShortClick(move: MaterialMove, location: Location, context: MaterialContext) {
@@ -108,7 +133,7 @@ class TableauDescription extends DropAreaDescription {
     const selected = rules.material(MaterialType.Card).selected()
     if (selected.length && isMoveItemType(MaterialType.Card)(move) && move.location.type === LocationType.Tableau) {
       if (!isEqual(move.location, location)) return false
-      selected.getIndex() === move.itemIndex && console.log("Is move to location", selected.getIndex(), move.itemIndex, move)
+      selected.getIndex() === move.itemIndex && console.log('Is move to location', selected.getIndex(), move.itemIndex, move)
       return selected.getIndex() === move.itemIndex
     }
     return super.canShortClick(move, location, context)

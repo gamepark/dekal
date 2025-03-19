@@ -53,4 +53,4 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
   }
 }
 
-const hideIdIfRotated = (item: MaterialItem) => item.location.rotation? ['id']: []
+const hideIdIfRotated = (item: MaterialItem) => !item.location.rotation? []: ['id']
