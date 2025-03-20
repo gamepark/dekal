@@ -23,7 +23,7 @@ export class GameCardDescription extends CardDescription {
   height = 6
   width = 6
   backImage = Back
-  images = {
+  images: Record<number, string> = {
     1: One,
     2: Two,
     3: Three,

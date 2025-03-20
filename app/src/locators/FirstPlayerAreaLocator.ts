@@ -12,9 +12,22 @@ export class FirstPlayerAreaLocator extends Locator {
     const coordinates = tableauLocator.getCoordinates({ type: LocationType.Tableau, player: location.player, x: 0, y: 0 }, context)
 
     const players = context.rules.players.length
-    if(players <= 3) {
-        coordinates.x! += 9
-        coordinates.y! -= 13
+    if (players === 2) {
+      coordinates.y! += 33
+      coordinates.x! += isLeftPosition(position)? 7: 12
+      return coordinates
+    }
+
+
+    if(players === 3) {
+      coordinates.y! += 33
+      coordinates.x! += position === Position.BottomCenter? 16: 10
+      return coordinates
+    }
+
+    if (players === 4) {
+      coordinates.x! += isLeftPosition(position)? -23: 43
+      coordinates.y! += isTopPosition(position)? 1: 20
       return coordinates
     }
 

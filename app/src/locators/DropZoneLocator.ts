@@ -40,7 +40,8 @@ class DropZoneLocator extends Locator {
 
   getSixPlayerDropArea(location: Location, context: MaterialContext) {
     const delta = 3
-    const baseY = 6 -((delta * gameCardDescription.height + .5)) + (context.player !== undefined? 4: 0)
+    const baseY = 6 -((delta * gameCardDescription.height + .5)) + (context.player !== undefined? 10.5
+      : 0)
     return {
       x: -20.5,
       y: baseY + (location.player! * (gameCardDescription.height + .5))
