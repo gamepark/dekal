@@ -18,6 +18,7 @@ import Seven from '../images/cards/7.jpg'
 import Eight from '../images/cards/8.jpg'
 import Nine from '../images/cards/9.jpg'
 import Back from '../images/cards/back.jpg'
+import { GameCardHelp } from './help/GameCardHelp'
 
 export class GameCardDescription extends CardDescription {
   height = 6
@@ -103,6 +104,8 @@ export class GameCardDescription extends CardDescription {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.DropArea) return false
     return move.itemIndex === context.index
   }
+
+  help = GameCardHelp
 }
 
 export const gameCardDescription = new GameCardDescription()
