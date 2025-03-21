@@ -3,10 +3,15 @@ import { css } from '@emotion/react'
 import { DekalRules } from '@gamepark/dekal/DekalRules'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
-import { StyledPlayerPanel, usePlayerId, useRules } from '@gamepark/react-game'
 import { Player } from '@gamepark/react-client'
+import { StyledPlayerPanel, usePlayerId, useRules } from '@gamepark/react-game'
 import { FC, HTMLAttributes, useMemo } from 'react'
-import { gameCardDescription } from '../material/GameCardDescription'
+import One from '../images/panels/1.jpg'
+import Two from '../images/panels/2.jpg'
+import Three from '../images/panels/3.jpg'
+import Four from '../images/panels/4.jpg'
+import Five from '../images/panels/5.jpg'
+import Six from '../images/panels/6.jpg'
 
 type DekalPlayerPanelProps = {
   player: Player
@@ -38,7 +43,7 @@ export const DekalPlayerPanel: FC<DekalPlayerPanelProps> = (props) => {
     <StyledPlayerPanel
       player={player}
       playerFocus={playerFocus}
-      backgroundImage={gameCardDescription.images[id]}
+      backgroundImage={PanelImage[id - 1]}
       css={backgroundPosition}
       { ...rest }
     />
@@ -47,6 +52,9 @@ export const DekalPlayerPanel: FC<DekalPlayerPanelProps> = (props) => {
 
 const backgroundPosition = css`
     background-color: white;
-  background-position: 0% center;
-  background-size: 80%;
+    background-size: auto 100%;
 `
+
+const PanelImage = [
+  One, Two, Three, Four, Five, Six
+]

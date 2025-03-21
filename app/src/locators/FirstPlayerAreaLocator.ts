@@ -32,12 +32,12 @@ export class FirstPlayerAreaLocator extends Locator {
     }
 
     if (players >= 5) {
-      if (position === Position.TopCenter) {
+      if (position === Position.TopCenter || position === Position.BottomCenter) {
         coordinates.x! += 4
-        coordinates.y! += isTopPosition(position)? -11: -7
+        coordinates.y! += isTopPosition(position)? -11: 31
       } else {
         coordinates.x! += isLeftPosition(position)? -16: 36
-        coordinates.y! += isTopPosition(position)? -3: 21
+        coordinates.y! += isTopPosition(position)? -3: 23
       }
 
       return coordinates

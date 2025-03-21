@@ -4,7 +4,7 @@ import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
 import { ChooseRevealedCard } from '@gamepark/dekal/rules/ChooseRevealedCard'
 import { isOutside } from '@gamepark/dekal/rules/utils/square.utils'
-import { DropAreaDescription, getRelativePlayerIndex, LocationContext, Locator, MaterialContext } from '@gamepark/react-game'
+import { DropAreaDescription, getRelativePlayerIndex, isItemContext, LocationContext, Locator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, isMoveItemType, Location, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
 import isEqual from 'lodash/isEqual'
 import { gameCardDescription } from '../material/GameCardDescription'
@@ -90,6 +90,11 @@ export class TableauLocator extends Locator {
     return locations
   }
 
+  getRotateZ(location: Location, context: MaterialContext): number {
+    if (!isOutside(location) || isItemContext(context)) return super.getRotateZ(location, context)
+    return this.locationDescription.getArrowRotation(location)
+  }
+
   locationDescription = new TableauDescription()
 
 }
@@ -99,33 +104,27 @@ class TableauDescription extends DropAreaDescription {
     super(gameCardDescription)
   }
 
+  image = Arrow
+
+
   getExtraCss(location: Location, _context: LocationContext): Interpolation<Theme> {
     if (isOutside(location)) {
       return css`
-          &:before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: url(${Arrow}) no-repeat center;
-              background-size: ${gameCardDescription.width * 0.7}em;
-              ${this.getArrowRotation(location)};
-          }
+          background: url(${Arrow}) no-repeat center;
+          background-size: ${gameCardDescription.width * 0.9}em;
       `
     }
     return css`
         background-image: linear-gradient(45deg, #ffffff30 25%, #ffffff00 25%, #ffffff00 50%, #ffffff30 50%, #ffffff30 75%, #ffffff00 75%, #ffffff00 100%);
-        background-size: 56.57px 56.57px;
+        background-size: 57px 57px;
     `
   }
 
   getArrowRotation(location: Location) {
-    if (location.y! < 0) return css`transform: rotateZ(90deg)`
-    if (location.x! > 3) return css`transform: rotateZ(180deg)`
-    if (location.y! > 3) return css`transform: rotateZ(270deg)`
-    return
+    if (location.y! < 0) return 90
+    if (location.x! > 3) return 180
+    if (location.y! > 3) return 270
+    return 0
   }
 
   canShortClick(move: MaterialMove, location: Location, context: MaterialContext) {
