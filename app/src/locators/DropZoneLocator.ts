@@ -1,4 +1,4 @@
-import { getRelativePlayerIndex, Locator, MaterialContext } from '@gamepark/react-game'
+import { DropAreaDescription, getRelativePlayerIndex, Locator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, Location } from '@gamepark/rules-api'
 import { gameCardDescription } from '../material/GameCardDescription'
 
@@ -66,6 +66,8 @@ class DropZoneLocator extends Locator {
       y:  17.5 + y * (gameCardDescription.height + .5)
     }
   }
+
+  locationDescription = new DropAreaDescription(gameCardDescription)
 }
 
 export const dropAreaLocator = new DropZoneLocator()

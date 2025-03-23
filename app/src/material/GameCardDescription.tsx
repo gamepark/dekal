@@ -92,6 +92,10 @@ export class GameCardDescription extends CardDescription {
     if (rules.game.rule?.id === RuleId.ChooseRevealedCard && context.player === rules.getActivePlayer()) {
       const card = rules.material(MaterialType.Card).index(context.index)
       const item = card.getItem()!
+      const { tutorial } = rules.game
+
+      if (tutorial?.step && [5, 6, 7, 9].includes(tutorial.step)) return
+      if (tutorial?.step && tutorial.step === 8 && item.location.player === context.player) return
       if (item.location.type !== LocationType.DropArea || item.selected) return
       return rules.material(MaterialType.Card).index(context.index).selectItem()
     }
