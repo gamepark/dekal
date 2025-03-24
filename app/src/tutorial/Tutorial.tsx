@@ -194,7 +194,9 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
         text: () => (
           <Trans defaults="tuto.opponent.play" components={BaseComponents} />
         )
-      },
+      }
+    },
+    {
       move: {
         player: opponent,
         interrupt: (move) => isMoveItemType(MaterialType.FirstPlayer)(move)
@@ -255,7 +257,9 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
           bottom: 15,
           top: 2
         }
-      }),
+      })
+    },
+    {
       move: {
         player: opponent,
       }
