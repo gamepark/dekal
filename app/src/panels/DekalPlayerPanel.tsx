@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 import { DekalRules } from '@gamepark/dekal/DekalRules'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
+import { ScoringHelper } from '@gamepark/dekal/rules/utils/ScoringHelper'
 import { Player } from '@gamepark/react-client'
 import { StyledPlayerPanel, usePlayerId, useRules } from '@gamepark/react-game'
 import { FC, HTMLAttributes, useMemo } from 'react'
@@ -12,6 +13,7 @@ import Three from '../images/panels/3.jpg'
 import Four from '../images/panels/4.jpg'
 import Five from '../images/panels/5.jpg'
 import Six from '../images/panels/6.jpg'
+import { gameCardDescription } from '../material/GameCardDescription'
 
 type DekalPlayerPanelProps = {
   player: Player
@@ -22,6 +24,7 @@ export const DekalPlayerPanel: FC<DekalPlayerPanelProps> = (props) => {
   const playerId = usePlayerId()
   const rules = useRules<DekalRules>()!
   const itsMe = playerId === player.id
+  const ended = rules.game.rule === undefined
   const dropAreaCards = rules.material(MaterialType.Card).location(LocationType.DropArea)
   const playerFocus = useMemo(() => ({
     materials: [
@@ -45,6 +48,7 @@ export const DekalPlayerPanel: FC<DekalPlayerPanelProps> = (props) => {
       playerFocus={playerFocus}
       backgroundImage={PanelImage[id - 1]}
       css={backgroundPosition}
+      mainCounter={ended? { value: new ScoringHelper(rules.game, player.id).score, image: gameCardDescription.backImage  }: undefined}
       { ...rest }
     />
   )

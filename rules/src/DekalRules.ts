@@ -43,8 +43,10 @@ export class DekalRules extends SecretMaterialRules<PlayerId, MaterialType, Loca
     return isCustomMoveType(CustomMoveType.SamplePlayer)(move) || super.isUnpredictableMove(move, player)
   }
 
+  rankByLowerScore = true
+
   getScore(player: PlayerId) {
-    return -new ScoringHelper(this.game, player).score
+    return new ScoringHelper(this.game, player).score
   }
 
   getTieBreaker(tieBreaker:number, playerId:PlayerId) {
