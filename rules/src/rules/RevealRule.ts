@@ -6,7 +6,6 @@ import { RuleId } from './RuleId'
 
 export class RevealRule extends MaterialRulesPart {
   onRuleStart() {
-    console.log(this.hiddenDropArea.length)
     return this.hiddenDropArea.rotateItems(false)
   }
 

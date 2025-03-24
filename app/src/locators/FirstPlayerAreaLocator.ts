@@ -13,7 +13,6 @@ export class FirstPlayerAreaLocator extends Locator {
 
     const players = context.rules.players.length
     if (players === 2) {
-      console.log(location.player)
       coordinates.y! += 33
       coordinates.x! += isLeftPosition(position)? 7: 12
       return coordinates

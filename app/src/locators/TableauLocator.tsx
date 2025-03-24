@@ -135,7 +135,6 @@ class TableauDescription extends DropAreaDescription {
     const selected = rules.material(MaterialType.Card).selected()
     if (selected.length && isMoveItemType(MaterialType.Card)(move) && move.location.type === LocationType.Tableau) {
       if (!isEqual(move.location, location)) return false
-      selected.getIndex() === move.itemIndex && console.log('Is move to location', selected.getIndex(), move.itemIndex, move)
       return selected.getIndex() === move.itemIndex
     }
     return super.canShortClick(move, location, context)

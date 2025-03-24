@@ -25,12 +25,6 @@ export class ChooseCardRule extends SimultaneousRule<PlayerId, MaterialType, Loc
 
 
   getActivePlayerLegalMoves(player:PlayerId) {
-    console.log(this.getTableau(player)
-      .moveItems({
-        type: LocationType.DropArea,
-        player: player,
-        rotation: true
-      }))
     return this.getTableau(player)
       .moveItems({
         type: LocationType.DropArea,
