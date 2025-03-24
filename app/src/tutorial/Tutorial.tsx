@@ -15,7 +15,7 @@ const BaseComponents = {
 }
 
 export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationType> {
-  version = 1
+  version = 2
 
   options = {
     players: [
