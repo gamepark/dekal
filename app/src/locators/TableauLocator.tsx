@@ -76,7 +76,25 @@ export class TableauLocator extends Locator {
       const player = rules.getActivePlayer()
       const possibleSpaces = new ChooseRevealedCard(context.rules.game).possibleSpaces
       const { tutorial } = rules.game
-      if (tutorial?.step && tutorial.step === 8 && player === context.player) return locations
+      if (tutorial?.step && tutorial.step === 8 && player === context.player) {
+        locations.push({
+          type: LocationType.Tableau,
+          player: context.player,
+          x: 3,
+          y: -1
+        })
+        return locations
+      }
+
+      if (tutorial?.step && tutorial.step === 16 && player === context.player) {
+        locations.push({
+          type: LocationType.Tableau,
+          player: context.player,
+          x: 4,
+          y: 1
+        })
+        return locations
+      }
 
 
       locations.push(

@@ -42,7 +42,7 @@ export class GameCardDescription extends CardDescription {
   getItemExtraCss(item: MaterialItem, context: ItemContext): Interpolation<Theme> {
     if (item.location.type !== LocationType.DropArea) return
     const selected = context.rules.material(context.type).selected(true)
-    if(selected.length && !item.selected) return css`filter: brightness(50%)`
+    if(selected.length && !item.selected) return css`> div > div { filter: brightness(50%) }`
     return
   }
 
