@@ -17,6 +17,6 @@ export const ChooseRevealedHeader = () => {
   }
 
   return (
-    <Trans defaults="header.choose.revealed.player" player={{ player: name}} />
+    <Trans defaults="header.choose.revealed.player" values={{ player: name}} />
   )
 }
