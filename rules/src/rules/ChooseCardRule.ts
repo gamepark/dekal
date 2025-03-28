@@ -1,6 +1,5 @@
 import { isMoveItemType, ItemMove, SimultaneousRule } from '@gamepark/rules-api'
-import { RuleMove } from '@gamepark/rules-api/dist/material/moves'
-import { RuleStep } from '@gamepark/rules-api/dist/material/rules/RuleStep'
+import { RuleMove, RuleStep } from '@gamepark/rules-api'
 import { PlayerId } from '../DekalOptions'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'

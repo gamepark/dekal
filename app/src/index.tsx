@@ -7,6 +7,7 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { gameAnimations } from './animations/GameAnimations'
 import App from './App'
+import { DekalHistory } from './history/DekalHistory'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
 import translations from './translations.json'
@@ -26,6 +27,7 @@ ReactDOM.render(
       locators={Locators}
       tutorial={new Tutorial()}
       animations={gameAnimations}
+      logs={new DekalHistory()}
       ai={TutorialAI}>
       <App/>
     </GameProvider>

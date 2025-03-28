@@ -31,6 +31,6 @@ const sizes = [
 
 const navigationCss = (players: number) => css`
   position: absolute; 
-  left: 2em; 
+  left: 200em; 
   top: ${players <= 3? 10: 25}em;
 `

@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { DekalRules } from '@gamepark/dekal/DekalRules'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
@@ -47,17 +46,11 @@ export const DekalPlayerPanel: FC<DekalPlayerPanelProps> = (props) => {
       player={player}
       playerFocus={playerFocus}
       backgroundImage={PanelImage[id - 1]}
-      css={backgroundPosition}
       mainCounter={ended? { value: new ScoringHelper(rules.game, player.id).score, image: gameCardDescription.backImage  }: undefined}
       { ...rest }
     />
   )
 }
-
-const backgroundPosition = css`
-    background-color: white;
-    background-size: auto 100%;
-`
 
 const PanelImage = [
   One, Two, Three, Four, Five, Six
