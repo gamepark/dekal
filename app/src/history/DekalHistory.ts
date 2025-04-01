@@ -14,15 +14,15 @@ import { ScoreLog } from './components/ScoreLog'
 export class DekalHistory implements LogDescription {
   getMovePlayedLogDescription(move: MaterialMove, context: MoveComponentContext) {
       if (context.game.rule?.id === RuleId.ChooseCard && isMoveItemType(MaterialType.Card)(move) && move.location.rotation && move.location.type === LocationType.DropArea) {
-        return { Component: ChooseCardLog }
+        return { Component: ChooseCardLog, player: move.location.player }
       }
 
       if (context.game.rule?.id === RuleId.RevealCard && isMoveItemType(MaterialType.Card)(move) && !move.location.rotation) {
-        return { Component: RevealedCardLog }
+        return { Component: RevealedCardLog, player: move.location.player }
       }
 
       if (context.game.rule?.id === RuleId.ChooseRevealedCard && isMoveItemType(MaterialType.Card)(move) && isOutside(move.location as Location)) {
-        return { Component: ChooseRevealedCardLog }
+        return { Component: ChooseRevealedCardLog, player: context.game.rule.player }
       }
 
       if (isMoveItemType(MaterialType.FirstPlayer)(move)) {
