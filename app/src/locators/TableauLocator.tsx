@@ -17,6 +17,10 @@ export class TableauLocator extends Locator {
     base.x += location.x! * (gameCardDescription.width + .5)
     base.y += location.y! * (gameCardDescription.height + .5)
 
+    if (isItemContext(context)) {
+      base.z = 0.5
+    }
+
     return base
   }
 
@@ -26,29 +30,28 @@ export class TableauLocator extends Locator {
     const players = context.rules.players.length
     switch (position) {
       case Position.TopLeft:
-        if (players >= 5) return { x: -56, y: -17.5, z: 0.5 }
-        //if (players <= 6) return { x: -56, y: -17.5, z: 0.5 }
-        return { x: -40, y: -17.5, z: 0.5 }
+        if (players >= 5) return { x: -56, y: -17.5 }
+        return { x: -40, y: -17.5 }
       case Position.TopCenter:
         if (players === 6) return { x: -5, y: -17.5 }
         return { x: -10, y: -17.5 }
       case Position.TopRight:
-        if (players >= 5) return { x: 36, y: -17.5, z: 0.5 }
-        return { x: 20, y: -17.5, z: 0.5 }
+        if (players >= 5) return { x: 36, y: -17.5 }
+        return { x: 20, y: -17.5 }
       case Position.BottomRight:
-        if (players === 3) return { x: 25, y: 17.5, z: 0.5 }
-        if (players === 4) return { x: 20, y: 17.5, z: 0.5 }
-        if (players >= 5) return { x: 36, y: 17.5, z: 0.5 }
-        return { x: 15, y: 21, z: 0.5 }
+        if (players === 3) return { x: 25, y: 17.5 }
+        if (players === 4) return { x: 20, y: 17.5 }
+        if (players >= 5) return { x: 36, y: 17.5 }
+        return { x: 15, y: 21 }
       case Position.BottomCenter:
         if (players === 6) return { x: -5, y: 17.5 }
         return { x: -10, y: 17.5 }
       case Position.BottomLeft:
       default:
-        if (players === 3) return { x: -45, y: 17.5, z: 0.5 }
-        if (players === 4) return { x: -40, y: 17.5, z: 0.5 }
-        if (players >= 5) return { x: -56, y: 17.5, z: 0.5 }
-        return { x: -35, y: 21, z: 0.5 }
+        if (players === 3) return { x: -45, y: 17.5 }
+        if (players === 4) return { x: -40, y: 17.5 }
+        if (players >= 5) return { x: -56, y: 17.5 }
+        return { x: -35, y: 21 }
     }
   }
 
