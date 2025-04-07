@@ -15,23 +15,23 @@ import { ScoreLog } from './components/ScoreLog'
 export class DekalHistory implements LogDescription {
   getMovePlayedLogDescription(move: MaterialMove, context: MoveComponentContext) {
       if (context.game.rule?.id === RuleId.ChooseCard && isMoveItemType(MaterialType.Card)(move) && move.location.rotation && move.location.type === LocationType.DropArea) {
-        return { Component: ChooseCardLog, player: move.location.player, css: centerCss }
+        return { Component: ChooseCardLog, player: move.location.player, css: centerCss, liveCss: true }
       }
 
       if (context.game.rule?.id === RuleId.RevealCard && isMoveItemType(MaterialType.Card)(move) && !move.location.rotation) {
-        return { Component: RevealedCardLog, player: move.location.player, css: centerCss }
+        return { Component: RevealedCardLog, player: move.location.player, css: centerCss, liveCss: true }
       }
 
       if (context.game.rule?.id === RuleId.ChooseRevealedCard && isMoveItemType(MaterialType.Card)(move) && isOutside(move.location as Location)) {
-        return { Component: ChooseRevealedCardLog, player: context.game.rule.player, css: centerCss }
+        return { Component: ChooseRevealedCardLog, player: context.game.rule.player, css: centerCss, liveCss: true }
       }
 
       if (isMoveItemType(MaterialType.FirstPlayer)(move)) {
-        return { Component: ChangeFirstPlayerLog, css: centerCss}
+        return { Component: ChangeFirstPlayerLog, css: centerCss, liveCss: true}
       }
 
       if (isEndGame(move)) {
-        return { Component: ScoreLog, css: centerCss }
+        return { Component: ScoreLog, css: centerCss, liveCss: true }
       }
 
       return
@@ -39,9 +39,6 @@ export class DekalHistory implements LogDescription {
 }
 
 const centerCss = css`
-  > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  > div > div {
   }
 `

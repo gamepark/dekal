@@ -20,12 +20,6 @@ export const ChooseRevealedCardLog: FC<MoveComponentProps> = (props) => {
   )
 }
 
-
 const pictureCss = css`
     height: 2em;
-    position: relative;
-    
-    > picture {
-        margin: 0;
-    }
 `

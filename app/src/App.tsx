@@ -23,7 +23,24 @@ export default function App() {
       <Menu/>
       <FailuresDialog/>
       <FullscreenDialog/>
-      {!loading && <LiveLogContainer css={css`position: absolute; top: 9em; width: 50em;`} /> }
+      {!loading && <LiveLogContainer css={[liveLogCss, liveLogPosition(game.players.length)]} /> }
     </>
   )
+}
+
+const liveLogCss = css`
+  position: absolute;
+  right: 1em;
+  width: 45em;
+  pointer-events: none;
+`
+
+const liveLogPosition = (players: number) => {
+  switch (players) {
+    case 2:
+    case 3:
+      return css`top: 9em;`
+    default:
+      return css`top: 18em;`
+  }
 }

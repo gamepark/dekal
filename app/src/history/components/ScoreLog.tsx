@@ -9,14 +9,14 @@ export const ScoreLog: FC<MoveComponentProps> = () => {
   const players = usePlayers()
 
   return (
-    <p>
+    <>
       <Trans defaults="log.score" /><br />
       <ul>
       {players.map((p) => (
         <PlayerScoreLog key={p.id} player={p.id} />
       ))}
       </ul>
-    </p>
+    </>
   )
 }
 
