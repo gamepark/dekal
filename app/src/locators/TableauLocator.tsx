@@ -146,7 +146,7 @@ class TableauDescription extends DropAreaDescription {
 
   getArrowRotation(location: Location) {
     if (location.y! < 0) return 90
-    if (location.x! > 3) return 180
+    if (location.x! > 3) return 179.9
     if (location.y! > 3) return 270
     return 0
   }
