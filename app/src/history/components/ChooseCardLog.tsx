@@ -10,7 +10,7 @@ export const ChooseCardLog: FC<MoveComponentProps> = (props) => {
   const name = usePlayerName(move.location.player)
   return (
     <>
-      <Trans defaults="log.choose" values={{ player: name }} components={{ back: <Picture src={Back} css={pictureCss}/> }}/>
+      <Trans i18nKey="log.choose" values={{ player: name }} components={{ back: <Picture src={Back} css={pictureCss}/> }}/>
     </>
   )
 }

@@ -21,13 +21,13 @@ We recommend to use this syntax to name the repository: "name-of-your-game"
 Use [Visual Studio Code](https://code.visualstudio.com/), [Webstorm](https://www.jetbrains.com/fr-fr/webstorm/) or any IDE you like to open the code on you
 computer.
 
-You must also install [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/)
+You must also install [Node.js](https://nodejs.org/) (v22+) and enable [Yarn](https://yarnpkg.com/) with `corepack enable`
 
 The project has dependencies, which you can find inside [/app/package.json](/app/package.json) and [/rules/package.json](/rules/package.json).
 
 You must install the dependencies using Yarn. Run this command line in the project's folder: `yarn install`
 
-Now, you should be able to start the game on your computer: `yarn start`
+Now, you should be able to start the game on your computer: `yarn dev`
 
 It should open a browser window on http://localhost:3000 and display the first version of your game. It is a debug session: if you change something in the code,
 it will automatically apply the changes!
@@ -137,7 +137,7 @@ You can easily create and manipulate the material in the setup:
   }
 ```
 
-Now, you can run `yarn start`, then `game.new()` in the browser console, and you should see the 3 cards in you hand!
+Now, you can run `yarn dev`, then `game.new()` in the browser console, and you should see the 3 cards in you hand!
 
 ### 3.4 The Rules Parts
 

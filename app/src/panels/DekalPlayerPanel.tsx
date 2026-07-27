@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DekalRules } from '@gamepark/dekal/DekalRules'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
@@ -38,7 +37,7 @@ export const DekalPlayerPanel: FC<DekalPlayerPanelProps> = (props) => {
       bottom: itsMe? 15: 8
     },
     animationTime: 400
-  }), [rules, player])
+  }), [rules, player, itsMe, dropAreaCards.length])
   const id = player.id
 
   return (

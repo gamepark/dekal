@@ -10,7 +10,7 @@ export const ScoreLog: FC<MoveComponentProps> = () => {
 
   return (
     <>
-      <Trans defaults="log.score" /><br />
+      <Trans i18nKey="log.score" /><br />
       <ul>
       {players.map((p) => (
         <PlayerScoreLog key={p.id} player={p.id} />
@@ -27,7 +27,7 @@ const PlayerScoreLog: FC<{ player: PlayerId }> = (props) => {
 
   return (
     <li>
-      <Trans defaults="log.score.player" values={{ player: name, score: new ScoringHelper(game, player).score }} />
+      <Trans i18nKey="log.score.player" values={{ player: name, score: new ScoringHelper(game, player).score }} />
     </li>
   )
 }

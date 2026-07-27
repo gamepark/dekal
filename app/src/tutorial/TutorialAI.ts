@@ -4,7 +4,7 @@ import { MaterialType } from '@gamepark/dekal/material/MaterialType'
 import { RuleId } from '@gamepark/dekal/rules/RuleId'
 import { GameAI } from '@gamepark/react-client'
 import { areAdjacentSquares, MaterialGame, MaterialMove, playAction } from '@gamepark/rules-api'
-import { sample, sumBy } from 'lodash'
+import { sample, sumBy } from 'es-toolkit'
 
 export const TutorialAI: GameAI = (game: MaterialGame, player: number) => {
   let legalMoves = new DekalRules(game).getLegalMoves(player)

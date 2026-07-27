@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialHelpProps, usePlayerName } from '@gamepark/react-game'
 import { FC } from 'react'
@@ -13,10 +12,10 @@ export const FirstPlayerHelp: FC<MaterialHelpProps> = (props) => {
     <>
       <h2>{t('help.firstplayer')}</h2>
       <p>
-        <Trans defaults="help.firstplayer.desc" components={BaseComponents} />
+        <Trans i18nKey="help.firstplayer.desc" components={BaseComponents} />
       </p>
       <p>
-        <Trans defaults="help.firstplayer.player" components={BaseComponents} values={{ player: name}} />
+        <Trans i18nKey="help.firstplayer.player" components={BaseComponents} values={{ player: name}} />
       </p>
     </>
   )

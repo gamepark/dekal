@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { MaterialRules } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
@@ -12,11 +11,11 @@ export const ChooseRevealedHeader = () => {
 
   if (itsMe) {
     return (
-      <Trans defaults="header.choose.revealed.me" />
+      <Trans i18nKey="header.choose.revealed.me" />
     )
   }
 
   return (
-    <Trans defaults="header.choose.revealed.player" values={{ player: name}} />
+    <Trans i18nKey="header.choose.revealed.player" values={{ player: name}} />
   )
 }

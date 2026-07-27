@@ -15,7 +15,7 @@ export const ChooseRevealedCardLog: FC<MoveComponentProps> = (props) => {
   const item = rules.material(MaterialType.Card).getItem(move.itemIndex)
   return (
     <>
-      <Trans defaults={isLine? "log.choose.line": "log.choose.column"} values={{ player: name, line: move.location.y! + 1, column: move.location.x! + 1 }} components={{ card: <Picture src={gameCardDescription.images[item.id as number]} css={pictureCss}/> }}/>
+      <Trans i18nKey={isLine? "log.choose.line": "log.choose.column"} values={{ player: name, line: move.location.y! + 1, column: move.location.x! + 1 }} components={{ card: <Picture src={gameCardDescription.images[item.id as number]} css={pictureCss}/> }}/>
     </>
   )
 }

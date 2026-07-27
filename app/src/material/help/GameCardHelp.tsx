@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialHelpProps } from '@gamepark/react-game'
 import { FC } from 'react'
@@ -11,12 +10,12 @@ export const GameCardHelp: FC<MaterialHelpProps> = () => {
     <>
       <h2>{t('help.card')}</h2>
       <p>
-        <Trans defaults="help.card.desc" components={BaseComponents} />
+        <Trans i18nKey="help.card.desc" components={BaseComponents} />
       </p>
       <p>
-        <Trans defaults="help.end" components={BaseComponents} />
+        <Trans i18nKey="help.end" components={BaseComponents} />
         <br /><br />
-        <Trans defaults="help.end.desc" components={BaseComponents} />
+        <Trans i18nKey="help.end.desc" components={BaseComponents} />
       </p>
     </>
   )

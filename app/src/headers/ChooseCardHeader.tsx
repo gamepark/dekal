@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { DekalRules } from '@gamepark/dekal/DekalRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { Trans } from 'react-i18next'
@@ -11,19 +10,19 @@ export const ChooseCardHeader = () => {
 
   if (playerId !== undefined && activePlayers.includes(playerId)) {
     return (
-      <Trans defaults="header.choose.me" />
+      <Trans i18nKey="header.choose.me" />
     )
   }
 
   if (activePlayers.length > 1) {
     return (
-      <Trans defaults="header.choose.players" />
+      <Trans i18nKey="header.choose.players" />
     )
   }
 
   if (activePlayers?.length === 1) {
     return (
-      <Trans defaults="header.choose.player" values={{ player: name }} />
+      <Trans i18nKey="header.choose.player" values={{ player: name }} />
     )
   }
 

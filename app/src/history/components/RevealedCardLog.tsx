@@ -15,7 +15,7 @@ export const RevealedCardLog: FC<MoveComponentProps> = (props) => {
 
   return (
     <>
-      <Trans defaults="log.reveal" values={{ player: name }} components={{ card: <Picture src={gameCardDescription.images[(move.reveal?.id ?? item.id) as number]} css={pictureCss}/> }}/>
+      <Trans i18nKey="log.reveal" values={{ player: name }} components={{ card: <Picture src={gameCardDescription.images[(move.reveal?.id ?? item.id) as number]} css={pictureCss}/> }}/>
     </>
   )
 }

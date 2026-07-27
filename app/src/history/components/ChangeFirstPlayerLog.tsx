@@ -3,7 +3,7 @@ import { MoveComponentProps, Picture, usePlayerName } from '@gamepark/react-game
 import { MoveItem } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
-import First from '../../images/first-player/first-player.png'
+import { firstPlayerTokenDescription } from '../../material/FirstPlayerTokenDescription'
 
 export const ChangeFirstPlayerLog: FC<MoveComponentProps> = (props) => {
   const move = props.move as MoveItem
@@ -11,7 +11,7 @@ export const ChangeFirstPlayerLog: FC<MoveComponentProps> = (props) => {
 
   return (
     <>
-      <Trans defaults="log.change.first" values={{ player: name }} components={{ first: <Picture src={First} css={pictureCss}/> }} />
+      <Trans i18nKey="log.change.first" values={{ player: name }} components={{ first: <Picture src={firstPlayerTokenDescription.image} css={pictureCss}/> }} />
     </>
   )
 }

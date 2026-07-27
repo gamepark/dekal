@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { PlayerId } from '@gamepark/dekal/DekalOptions'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
@@ -34,14 +33,14 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.welcome" components={BaseComponents} />
+          <Trans i18nKey="tuto.welcome" components={BaseComponents} />
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.tableau" components={BaseComponents} />
+          <Trans i18nKey="tuto.tableau" components={BaseComponents} />
         ),
         position: { x: 39 }
       },
@@ -59,7 +58,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.choose" components={BaseComponents} />
+          <Trans i18nKey="tuto.choose" components={BaseComponents} />
         ),
         position: { y: 15 }
       },
@@ -92,7 +91,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.simultaneous" components={BaseComponents} />
+          <Trans i18nKey="tuto.simultaneous" components={BaseComponents} />
         ),
         position: { y: 20 }
       },
@@ -110,7 +109,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.first" components={BaseComponents} />
+          <Trans i18nKey="tuto.first" components={BaseComponents} />
         ),
         position: { y: -10 }
       },
@@ -123,7 +122,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.expl" components={BaseComponents} />
+          <Trans i18nKey="tuto.expl" components={BaseComponents} />
         ),
         position: { y: 20 }
       },
@@ -140,7 +139,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.insert" components={BaseComponents} />
+          <Trans i18nKey="tuto.insert" components={BaseComponents} />
         ),
         position: { x: 27, y: 25  }
       },
@@ -164,7 +163,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.play.1" components={BaseComponents} />
+          <Trans i18nKey="tuto.play.1" components={BaseComponents} />
         ),
         position: { y: 30  }
       },
@@ -192,7 +191,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent.play" components={BaseComponents} />
+          <Trans i18nKey="tuto.opponent.play" components={BaseComponents} />
         )
       }
     },
@@ -205,7 +204,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.first.change" components={BaseComponents} />
+          <Trans i18nKey="tuto.first.change" components={BaseComponents} />
         )
       },
       move: {}
@@ -213,7 +212,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.new" components={BaseComponents} />
+          <Trans i18nKey="tuto.new" components={BaseComponents} />
         ),
         position: { y: 15 }
       },
@@ -245,7 +244,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.opponent.first" components={BaseComponents} />
+          <Trans i18nKey="tuto.opponent.first" components={BaseComponents} />
         ),
         position: { y: 20 }
       },
@@ -267,7 +266,7 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.play.2" components={BaseComponents} />
+          <Trans i18nKey="tuto.play.2" components={BaseComponents} />
         ),
         position: { x: 30, y: 15  }
       },
@@ -293,28 +292,28 @@ export class Tutorial extends MaterialTutorial<PlayerId, MaterialType, LocationT
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.end" components={BaseComponents} />
+          <Trans i18nKey="tuto.end" components={BaseComponents} />
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.goal" components={BaseComponents} />
+          <Trans i18nKey="tuto.goal" components={BaseComponents} />
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.score" components={BaseComponents} />
+          <Trans i18nKey="tuto.score" components={BaseComponents} />
         )
       }
     },
     {
       popup: {
         text: () => (
-          <Trans defaults="tuto.go" components={BaseComponents} />
+          <Trans i18nKey="tuto.go" components={BaseComponents} />
         )
       }
     },

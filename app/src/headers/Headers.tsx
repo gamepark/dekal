@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { RuleId } from '@gamepark/dekal/rules/RuleId'
 import { ComponentType } from 'react'
 import { ChooseCardHeader } from './ChooseCardHeader'

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from '@emotion/react'
 import { LocationType } from '@gamepark/dekal/material/LocationType'
 import { MaterialType } from '@gamepark/dekal/material/MaterialType'
@@ -6,14 +5,14 @@ import { ChooseRevealedCard } from '@gamepark/dekal/rules/ChooseRevealedCard'
 import { isOutside } from '@gamepark/dekal/rules/utils/square.utils'
 import { DropAreaDescription, getRelativePlayerIndex, isItemContext, LocationContext, Locator, MaterialContext } from '@gamepark/react-game'
 import { Coordinates, isMoveItemType, Location, MaterialMove, XYCoordinates } from '@gamepark/rules-api'
-import isEqual from 'lodash/isEqual'
+import { isEqual } from 'es-toolkit'
 import { gameCardDescription } from '../material/GameCardDescription'
 import { playerPositions, Position } from './position.utils'
 import Arrow from '../images/arrow.png'
 
 export class TableauLocator extends Locator {
   getCoordinates(location: Location, context: MaterialContext): Partial<Coordinates> {
-    let base = this.getBaseCoordinates(location, context)
+    const base = this.getBaseCoordinates(location, context)
     base.x += location.x! * (gameCardDescription.width + .5)
     base.y += location.y! * (gameCardDescription.height + .5)
 
