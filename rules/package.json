@@ -1,6 +1,6 @@
 {
   "name": "@gamepark/dekal",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "The rules of Dekal adapted for Game Park",
   "sideEffects": false,
   "type": "module",
