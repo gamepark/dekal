@@ -1,4 +1,4 @@
-import { DekalOptionsSpec } from '@gamepark/dekal/DekalOptions'
+import { DekalOptionsSpecV2 } from '@gamepark/dekal/DekalOptions'
 import { DekalRules } from '@gamepark/dekal/DekalRules'
 import { DekalSetup } from '@gamepark/dekal/DekalSetup'
 import { GameProvider } from '@gamepark/react-game'
@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="dekal"
       Rules={DekalRules}
-      optionsSpec={DekalOptionsSpec}
+      optionsSpec={DekalOptionsSpecV2}
       GameSetup={DekalSetup}
       material={Material}
       materialI18n={MaterialI18n}
